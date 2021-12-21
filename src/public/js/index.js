@@ -19,16 +19,13 @@ const App = ((APICtrl, UICtrl) => {
         const { target: trackItem } = event;
         const { trackAnalysis } = await APICtrl.getTrackAnalysis(trackItem.id);
         UICtrl.createTrackMeta(trackAnalysis);
-    }
-
-    const _init = () => {
-        searchForm.addEventListener('submit', onSearchSubmit);
-        trackList.addEventListener('click', onTrackClicked);
+        trackList.scrollIntoView()
     }
 
     return {
         init() {
-            return _init();
+            searchForm.addEventListener('submit', onSearchSubmit);
+            trackList.addEventListener('click', onTrackClicked);
         }
     }
 

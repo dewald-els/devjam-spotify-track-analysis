@@ -63,15 +63,19 @@ const UIController = (() => {
         `
     }
 
-    const _createTrackMeta = ({ track, meta, beats, sections, bars }) => {
-        trackAnalysis.innerHTML = '';
-        const cycle = determineChordsFromKey(track.mode, track.key)
-        const chordList = cycle.chords.map((chord, idx) => {
+    const _createChordList = chords => {
+        return chords.map((chord, idx) => {
             if (idx === 0 || idx === 4) {
                 return `<span><b>${ chord }</b></span>`
             }
             return `<span>${ chord }</span>`
         }).join(' - ')
+    }
+
+    const _createTrackMeta = ({ track, meta, beats, sections, bars }) => {
+        trackAnalysis.innerHTML = '';
+        const cycle = determineChordsFromKey(track.mode, track.key)
+        const chordList = _createChordList(cycle.chords)
 
         const displayKeySection = _createTrackMetaSection('tuning-fork.png', `<b>Key of the Song:</b> <br> <b>${ cycle.displayKey } ${ cycle.mode }</b>`);
         const tempoSection = _createTrackMetaSection('metronome.png', `<b>Tempo of the song is:</b> <br> ${ Math.floor(track.tempo) }bpm`)
@@ -79,11 +83,15 @@ const UIController = (() => {
         const chordsSection = _createTrackMetaSection('sheet.png', `<b>Chords for Key:</b> <br> <div>${ chordList }</div>`)
 
         const html = `
-            
             <ul class="list-group">
-                <li class="list-group-item bg-dark text-white">
-                    <h4 class="mb-0">Overview</h4>
-                    <p class="mb-0 text-muted">The following data is an approximation</p>
+                <li class="list-group-item bg-dark text-white d-flex align-items-center">
+                    <aside class="me-3">
+                        <img src="img/file.png" alt="File icon" width="32" />
+                    </aside>
+                    <div>
+                        <h4 class="mb-0">Overview</h4>
+                        <p class="mb-0 text-muted">The following data is an approximation</p>
+                    </div>
                 </li>
                 ${ displayKeySection }
                 ${ tempoSection }
