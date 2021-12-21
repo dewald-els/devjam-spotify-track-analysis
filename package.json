@@ -7,7 +7,7 @@
     "test": "jest",
     "start": "node build/index.js",
     "dev": "nodemon src/index.ts",
-    "postbuild": "copyfiles -u 1 src/public/*.html src/public/**/*.* ./build",
+    "postbuild": "copyfiles -u 1 src/public/*.* src/public/**/*.* ./build",
     "build": "tsc --project ./src"
   },
   "keywords": [
