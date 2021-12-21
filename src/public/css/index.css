@@ -1,0 +1,13 @@
+.track-meta-sections {
+}
+.track-meta-section {
+    display: flex;
+    align-items: center;
+}
+.track-meta-section aside {
+    margin-right: 1rem;
+}
+.track-meta-section img {
+    display: block;
+    width: 55px;
+}
