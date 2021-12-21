@@ -1,6 +1,9 @@
 # DevJam - Spotify Track Analysis
 
-Use the Track Analysis endpoint to give an overview of a song's key, temp and possible chord combinations.
+Use the Track Analysis endpoint to give an overview of a song's key, temp and possible chord combinations. The API provides approximate data and might not always be 100% accurate.
+
+### Live app
+Demo Link: [https://devjam-dce-spotify-analysis.herokuapp.com/](https://devjam-dce-spotify-analysis.herokuapp.com/)
 
 <figure>
     <img src="screenshot.png" alt="Screenshot Spotify Track Analysis" />
@@ -8,6 +11,7 @@ Use the Track Analysis endpoint to give an overview of a song's key, temp and po
 
 ## Table of contents
 - [DevJam - Spotify Track Analysis](#devjam---spotify-track-analysis)
+    - [Live app](#live-app)
   - [Table of contents](#table-of-contents)
   - [Installation](#installation)
   - [Usage](#usage)
