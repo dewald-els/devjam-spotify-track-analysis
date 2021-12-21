@@ -3,7 +3,45 @@
 Use the Track Analysis endpoint to give an overview of a song's key, temp and possible chord combinations.
 
 ## Table of contents
-1. [Installation](#installation)
-2. [Usage](#usage)
-3. Acknowledgements
-4. 
+- [DevJam - Spotify Track Analysis](#devjam---spotify-track-analysis)
+  - [Table of contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Acknowledgements](#acknowledgements)
+  - [Contributions](#contributions)
+  - [License](#license)
+
+## Installation
+The project uses NodeJS with TypeScript for the backend and HTML + JavaScript for front-end.
+
+Run the installation from the root of the directory:
+
+```bash
+npm install
+```
+
+## Usage
+
+To run the project, run the start command from the root directory of the project. It will be served on http://localhost:3000 by default.
+
+```bash
+npm start
+```
+
+To build the project run the build command from the root of the directory.
+
+```bash
+npm run build
+```
+
+## Acknowledgements
+- [Bootstrap 5](https://getbootstrap.com)
+- [Flaticon](https://flaticon.com)
+- [Spotify Web API](https://developer.spotify.com/)
+
+## Contributions
+
+Pull requests accepted.
+
+## License
+Unlicensed
