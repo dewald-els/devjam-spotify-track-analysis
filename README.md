@@ -2,6 +2,10 @@
 
 Use the Track Analysis endpoint to give an overview of a song's key, temp and possible chord combinations.
 
+<figure>
+    <img src="screenshot.png" alt="Screenshot Spotify Track Analysis" />
+</figure>
+
 ## Table of contents
 - [DevJam - Spotify Track Analysis](#devjam---spotify-track-analysis)
   - [Table of contents](#table-of-contents)
