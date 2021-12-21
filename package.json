@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon src/index.ts",
+    "start": "node build/index.js",
+    "dev": "nodemon src/index.ts",
     "postbuild": "copyfiles -u 1 src/public/*.html src/public/**/*.* ./build",
     "build": "tsc --project ./src"
   },
