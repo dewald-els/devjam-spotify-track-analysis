@@ -13,8 +13,10 @@ export const KEY_LEGEND = {
     11: 'B',
 }
 
-const KEY_MAJOR = 1
-const KEY_MINOR = 0
+const MAJOR_MINOR = {
+    0: 'Minor',
+    1: 'Major'
+}
 
 const CYCLE_OF_FIFTHS = [
     {
@@ -52,10 +54,11 @@ const CYCLE_OF_FIFTHS = [
         displayKey: 'F#',
         chords: ['F#', 'G#m', 'A#m', 'B', 'C#', 'D#m', 'E#dim']
     },
+    // Flat Keys
     {
         key: 'C#',
-        displayKey: 'C#',
-        chords: ['C#', 'D#m', 'E#m', 'F#', 'G#', 'A#m', 'F#dim']
+        displayKey: 'D♭',
+        chords: ['D♭', 'E♭m', 'Fm', 'G♭', 'A♭', 'B♭m', 'Cdim']
     },
     {
         key: 'G#',
@@ -81,9 +84,20 @@ const CYCLE_OF_FIFTHS = [
 
 export function determineChordsFromKey(mode, keyIndex) {
     const keyChord = KEY_LEGEND[keyIndex];
-    const majorMinor = mode === KEY_MINOR ? 'Minor' : 'Major';
+    const majorMinor = MAJOR_MINOR[mode]
+
+    if (!majorMinor) {
+        throw new Error('Invalid key mode provided as: ' + mode)
+    }
+
+    const key = CYCLE_OF_FIFTHS.find(cycle => cycle.key === keyChord)
+
+    if (!key) {
+        throw new Error('Invalid keyIndex was provided as: ' + keyIndex)
+    }
+
     return {
-        ...CYCLE_OF_FIFTHS.find(cycle => cycle.key === keyChord),
+        ...key,
         mode: majorMinor
     };
 }

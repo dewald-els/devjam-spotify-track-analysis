@@ -69,6 +69,7 @@ function searchTracks(trackText) {
                 method: 'GET',
                 headers: createBearerHeader(exports.spotifyTokenData.access_token),
             });
+            console.log('searchTracks', data);
             if ((data === null || data === void 0 ? void 0 : data.error) && (data.error.status === 401 && data.error.message === 'The access token expired')) {
                 retryCount++;
                 yield getToken();
