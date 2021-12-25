@@ -1,6 +1,7 @@
 import { determineChordsFromKey } from "./music.js";
+import TrackChartController from './track-chart.controller.js'
 
-const UIController = (() => {
+const UIController = ((trackChartCtrl) => {
 
     const searchForm = document.getElementById('search-form');
     const searchInput = document.getElementById('search-input');
@@ -9,12 +10,12 @@ const UIController = (() => {
     const trackAnalysis = document.getElementById('track-analysis');
 
     const _createCardHeader = (title, subTitle = '') => {
-        let titleHTML = title.trim() ? `<h4 class="card-title mb-0">${title}</h4>` : ''
-        let subTitleHTML = subTitle.trim() ? `<p class="card-subtitle text-muted">${subTitle}</p>` : ''
-        
+        let titleHTML = title.trim() ? `<h4 class="card-title mb-0">${ title }</h4>` : ''
+        let subTitleHTML = subTitle.trim() ? `<p class="card-subtitle text-muted">${ subTitle }</p>` : ''
+
         return `<header class="card-header">
-            ${titleHTML}            
-            ${subTitleHTML}
+            ${ titleHTML }            
+            ${ subTitleHTML }
         </header>`
     }
 
@@ -56,7 +57,7 @@ const UIController = (() => {
         return `
         <li class="track-meta-section list-group-item py-3">
             <aside>
-                <img src="img/${img}" alt="Tuning fork in music" />
+                <img src="img/${ img }" alt="Tuning fork in music" />
             </aside>
             <div>${ text }</div>
         </li>
@@ -81,6 +82,7 @@ const UIController = (() => {
         const tempoSection = _createTrackMetaSection('metronome.png', `<b>Tempo of the song is:</b> <br> ${ Math.floor(track.tempo) }bpm`)
         const durationSection = _createTrackMetaSection('hourglass.png', `<b>Duration of the song:</b> <br> ${ (track.duration / 60).toFixed(2) }`)
         const chordsSection = _createTrackMetaSection('sheet.png', `<b>Chords for Key:</b> <br> <div>${ chordList }</div>`)
+        const timeSignature = _createTrackMetaSection('metronome.png', `<b>Time Signature</b> <br> ${ track.time_signature }/4`)
 
         const html = `
             <ul class="list-group">
@@ -90,16 +92,19 @@ const UIController = (() => {
                     </aside>
                     <div>
                         <h4 class="mb-0">Overview</h4>
-                        <p class="mb-0 text-muted">The following data is an approximation</p>
+                        <p class="mb-0 text-muted">The following data may not be 100% accurate</p>
                     </div>
                 </li>
                 ${ displayKeySection }
                 ${ tempoSection }
                 ${ durationSection }
                 ${ chordsSection }
+                ${ timeSignature }
             </ul>
+            <hr />
         `;
         trackAnalysis.insertAdjacentHTML('beforeend', html);
+        trackChartCtrl.draw({ sections, bars, beats });
     }
 
     return {
@@ -119,6 +124,6 @@ const UIController = (() => {
             return _createTrackMeta(track);
         }
     }
-})();
+})(TrackChartController);
 
 export default UIController
