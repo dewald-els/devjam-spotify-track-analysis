@@ -1,5 +1,6 @@
 import { determineChordsFromKey } from "./music.js";
 import TrackChartController from './track-chart.controller.js'
+import COLOURS from './random-colours.js'
 
 const UIController = ((trackChartCtrl) => {
 
@@ -73,6 +74,26 @@ const UIController = ((trackChartCtrl) => {
         }).join(' - ')
     }
 
+    const _createSectionBlocks = (track, sections) => {
+        const calculateWidth = (sectionDuration, trackDuration) => {
+            return ((sectionDuration / trackDuration) * 100)
+        }
+        const sectionBlocks = sections.map((section, idx) => {
+            const sectionWidth = calculateWidth(section.duration, track.duration) + '%'
+            const sectionKey = determineChordsFromKey(section.mode, section.key)
+            const startTime = section.start === 0 ? '0:00' : (section.start / 60).toFixed(2)
+            const endTime = ((section.start + section.duration) / 60).toFixed(2)
+            const colour = COLOURS[idx]
+            return `
+                <div class="d-flex flex-column p-1" style="width: ${ sectionWidth }; font-size: .7rem; height: 75px; background: ${ colour }">
+                    <span style="font-weight: bold; color: #333;">${ sectionKey.displayKey } ${ sectionKey.mode }</span>
+                    <span class="mt-auto">${ startTime } - ${ endTime }</span>
+                </div>
+            `
+        })
+        return sectionBlocks.join('')
+    }
+
     const _createTrackMeta = ({ track, meta, beats, sections, bars }) => {
         trackAnalysis.innerHTML = '';
         const cycle = determineChordsFromKey(track.mode, track.key)
@@ -83,7 +104,7 @@ const UIController = ((trackChartCtrl) => {
         const durationSection = _createTrackMetaSection('hourglass.png', `<b>Duration of the song:</b> <br> ${ (track.duration / 60).toFixed(2) }`)
         const chordsSection = _createTrackMetaSection('sheet.png', `<b>Chords for Key:</b> <br> <div>${ chordList }</div>`)
         const timeSignature = _createTrackMetaSection('metronome.png', `<b>Time Signature</b> <br> ${ track.time_signature }/4`)
-
+        const trackSectionBlocks = _createSectionBlocks(track, sections)
         const html = `
             <ul class="list-group">
                 <li class="list-group-item bg-dark text-white d-flex align-items-center">
@@ -102,6 +123,10 @@ const UIController = ((trackChartCtrl) => {
                 ${ timeSignature }
             </ul>
             <hr />
+            <div>
+                <h4>Section Duration and keys</h4>
+                <div class="d-flex">${ trackSectionBlocks }</div>
+            </div>
         `;
         trackAnalysis.insertAdjacentHTML('beforeend', html);
         trackChartCtrl.draw({ sections, bars, beats });

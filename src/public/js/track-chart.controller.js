@@ -1,4 +1,5 @@
 import { determineChordsFromKey } from './music.js'
+
 const TrackChartController = (() => {
     const context = document.getElementById('trackChart').getContext('2d')
 
@@ -6,7 +7,7 @@ const TrackChartController = (() => {
 
         const labels = sections.map((section, idx) => {
             const cycle = determineChordsFromKey(section.mode, section.key);
-            return cycle.displayKey + ' ' + cycle.mode
+            return `${ cycle.displayKey + ' ' + cycle.mode }`
         })
 
         const keyConfidence = sections.map((section, idx) => {
@@ -17,7 +18,7 @@ const TrackChartController = (() => {
             labels: labels,
             datasets: [
                 {
-                    label: 'Key Confidence',
+                    label: 'Key Confidence (1 - Confident, 0 - Not Confident)',
                     data: keyConfidence,
                     borderColor: 'red',
                     backgroundColor: 'orange',
@@ -39,13 +40,17 @@ const TrackChartController = (() => {
                     },
                     title: {
                         display: true,
-                        text: 'Track Analysis'
+                        text: 'Track Analysis - Sections'
                     }
                 }
             },
         };
 
-        const chart = new Chart(context, config)
+        let activeChart = Chart.getChart("trackChart")
+        if (activeChart) {
+            activeChart.destroy();
+        }
+        new Chart(context, config)
     }
 
     return {
