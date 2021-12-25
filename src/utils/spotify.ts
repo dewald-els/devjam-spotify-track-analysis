@@ -1,5 +1,5 @@
 import axios from "axios";
-import {btoa} from "buffer";
+import { btoa } from "buffer";
 import {
     SpotifyAccessData,
     SpotifyAnalysisResponse, SpotifyAnalysisResponseData,
@@ -12,7 +12,7 @@ function createBearerHeader(accessToken: string) {
     return {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken}`
+        'Authorization': `Bearer ${ accessToken }`
     }
 }
 
@@ -26,8 +26,17 @@ export let spotifyTokenData: SpotifyAccessData = {
 async function getToken(): Promise<void> {
     const spotifyClientId = process.env.SPOTIFY_CLIENT_ID;
     const spotifyClientSecret = process.env.SPOTIFY_CLIENT_SECRET;
+
+    if (!spotifyClientId) {
+        throw new Error('Spotify ClientId not found.')
+    }
+
+    if (!spotifyClientSecret) {
+        throw new Error('Spotify ClientSecret not found.')
+    }
+
     try {
-        const {data}: SpotifyTokenResponse = await axios('https://accounts.spotify.com/api/token', {
+        const { data }: SpotifyTokenResponse = await axios('https://accounts.spotify.com/api/token', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -60,14 +69,12 @@ export async function searchTracks(trackText: string): Promise<[string | null, S
         if (spotifyTokenData.access_token === '') {
             await getToken();
         }
-        const {data}: SpotifyTrackSearchResponse = await axios('https://api.spotify.com/v1/search?type=track&limit=2&q=' + trackText, {
+        const { data }: SpotifyTrackSearchResponse = await axios('https://api.spotify.com/v1/search?type=track&limit=2&q=' + trackText, {
             method: 'GET',
             headers: createBearerHeader(spotifyTokenData.access_token),
         });
 
-        console.log('searchTracks', data)
-
-        if (data?.error && (data.error.status === 401 && data.error.message === 'The access token expired')) {
+        if (data?.error && data.error.status === 401) {
             retryCount++;
             await getToken()
             return searchTracks(trackText);
@@ -87,7 +94,7 @@ export async function getTrackAnalysis(trackId: string): Promise<[string | null,
             await getToken();
         }
 
-        const {data}: SpotifyAnalysisResponse = await axios('https://api.spotify.com/v1/audio-analysis/' + trackId, {
+        const { data }: SpotifyAnalysisResponse = await axios('https://api.spotify.com/v1/audio-analysis/' + trackId, {
             method: 'GET',
             headers: createBearerHeader(spotifyTokenData.access_token),
         });
