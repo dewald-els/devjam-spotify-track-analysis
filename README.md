@@ -1,3 +1,4 @@
+
 # DevJam - Spotify Track Analysis
 
 Use the Track Analysis endpoint to give an overview of a song's key, temp and possible chord combinations. The API provides approximate data and might not always be 100% accurate.
@@ -33,7 +34,7 @@ npm install
 To run the project, run the start command from the root directory of the project. It will be served on http://localhost:3000 by default.
 
 ```bash
-npm start
+npm run dev
 ```
 
 To build the project run the build command from the root of the directory.
@@ -41,10 +42,15 @@ To build the project run the build command from the root of the directory.
 ```bash
 npm run build
 ```
+To test the built project run the start command.
+
+```bash
+npm start
+```
 
 ## Acknowledgements
 - [Bootstrap 5](https://getbootstrap.com)
-- [Flaticon](https://flaticon.com)
+- [Flaticon by Freepik](https://flaticon.com)
 - [Spotify Web API](https://developer.spotify.com/)
 
 ## Contributions

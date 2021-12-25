@@ -20,14 +20,14 @@ const TrackChartController = (() => {
                 {
                     label: 'Key Confidence (1 - Confident, 0 - Not Confident)',
                     data: keyConfidence,
-                    borderColor: 'red',
-                    backgroundColor: 'orange',
+                    borderColor: 'orange',
+                    backgroundColor: 'red',
                 }
             ]
         }
     }
 
-    const _draw = ({ sections, bars, beats }) => {
+    const _draw = ({ sections }) => {
         const data = _createSectionChart(sections)
         const config = {
             type: 'line',
