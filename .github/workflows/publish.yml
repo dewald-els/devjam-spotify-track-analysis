@@ -28,7 +28,7 @@ jobs:
       - name: copy env file
         run: |
           # Create env
-          touch ./build/.env
+          touch build/.env
           echo SPOTIFY_CLIENT_ID=${{ secrets.SPOTIFY_CLIENT_ID }} >> .env
           echo SPOTIFY_CLIENT_SECRET=${{ secrets.SPOTIFY_CLIENT_SECRET }} >> .env
         working-directory: "build"
