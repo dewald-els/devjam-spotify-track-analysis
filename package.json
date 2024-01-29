@@ -1,10 +1,9 @@
 {
   "name": "spotify-track-analysis",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Analysis data from Spotify's Web API",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
     "start": "node build/index.js",
     "dev": "nodemon src/index.ts",
     "postbuild": "copyfiles -u 1 src/public/*.* src/public/**/*.* ./build",
