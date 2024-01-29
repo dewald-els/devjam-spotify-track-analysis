@@ -31,7 +31,7 @@ jobs:
           touch ./build/.env
           echo SPOTIFY_CLIENT_ID=${{ secrets.SPOTIFY_CLIENT_ID }} >> .env
           echo SPOTIFY_CLIENT_SECRET=${{ secrets.SPOTIFY_CLIENT_SECRET }} >> .env
-        working-directory: my-app-path
+        working-directory: .
       - name: "Deploy to Azure WebApp"
         uses: azure/webapps-deploy@v2
         with:
