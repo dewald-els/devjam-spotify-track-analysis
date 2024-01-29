@@ -85,7 +85,7 @@ const UIController = ((trackChartCtrl) => {
             const endTime = ((section.start + section.duration) / 60).toFixed(2)
             const colour = COLOURS[idx]
             return `
-                <div class="d-flex flex-column p-1" style="width: ${ sectionWidth }; font-size: .7rem; height: 75px; background: ${ colour }">
+                <div class="d-flex flex-column p-1" style="width: ${ sectionWidth }; font-size: .7rem; height: 95px; background: ${ colour }">
                     <span style="font-weight: bold; color: #333;">${ sectionKey.displayKey } ${ sectionKey.mode }</span>
                     <span class="mt-auto">${ startTime } - ${ endTime }</span>
                 </div>
@@ -125,7 +125,7 @@ const UIController = ((trackChartCtrl) => {
             <hr />
             <div>
                 <h4>Section Duration and keys</h4>
-                <div class="d-flex">${ trackSectionBlocks }</div>
+                <div class="d-flex rounded overflow-hidden">${ trackSectionBlocks }</div>
             </div>
         `;
         trackAnalysis.insertAdjacentHTML('beforeend', html);

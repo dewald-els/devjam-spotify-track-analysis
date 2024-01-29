@@ -31,6 +31,12 @@ function getToken() {
     return __awaiter(this, void 0, void 0, function* () {
         const spotifyClientId = process.env.SPOTIFY_CLIENT_ID;
         const spotifyClientSecret = process.env.SPOTIFY_CLIENT_SECRET;
+        if (!spotifyClientId) {
+            throw new Error('Spotify ClientId not found.');
+        }
+        if (!spotifyClientSecret) {
+            throw new Error('Spotify ClientSecret not found.');
+        }
         try {
             const { data } = yield (0, axios_1.default)('https://accounts.spotify.com/api/token', {
                 method: 'POST',
@@ -69,8 +75,7 @@ function searchTracks(trackText) {
                 method: 'GET',
                 headers: createBearerHeader(exports.spotifyTokenData.access_token),
             });
-            console.log('searchTracks', data);
-            if ((data === null || data === void 0 ? void 0 : data.error) && (data.error.status === 401 && data.error.message === 'The access token expired')) {
+            if ((data === null || data === void 0 ? void 0 : data.error) && data.error.status === 401) {
                 retryCount++;
                 yield getToken();
                 return searchTracks(trackText);
