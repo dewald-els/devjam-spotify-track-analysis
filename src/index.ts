@@ -3,9 +3,7 @@ import { join } from "path";
 import dotenv from "dotenv";
 import { getTrackAnalysis, searchTracks } from "./utils/spotify";
 
-if (process.env.NODE_ENV !== "production") {
-  dotenv.config();
-}
+dotenv.config();
 
 const { PORT = 3000 } = process.env;
 const app = express();
